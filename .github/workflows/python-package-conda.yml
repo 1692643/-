@@ -1,7 +1,11 @@
 name: Python Package using Conda
 
-on: [push]
+on: 
+ schedule:
+    - cron: "55 7 * * *"  # scheduled at 08:01 (UTC+8) everyday #每天早上八点零一分打卡
+ workflow_dispatch:
 
+ 
 jobs:
   build-linux:
     runs-on: ubuntu-latest
