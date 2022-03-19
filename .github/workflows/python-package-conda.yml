@@ -1,43 +1,38 @@
+# This is a basic workflow to help you get started with Actions
+
 name: daxuexi
 
-on: 
-   schedule:
-    - cron: "55 7 * * *"
-   workflow_dispatch:
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  schedule:
+    - cron: "25 8 * * *"  # scheduled at 08:01 (UTC+8) everyday #每天早上八点零一分打卡
+      
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build-linux:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    strategy:
-      max-parallel: 5
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python 3.80
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.80
-    - name: Add conda to system path
-      run: |
-        # $CONDA is an environment variable pointing to the root of the miniconda directory
-        echo $CONDA/bin >> $GITHUB_PATH
-    - name: Install dependencies
-      run: |
-        conda env update --file environment.yml --name base
-    - name: Lint with flake8
-      run: |
-        conda install flake8
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Test with pytest
-      run: |
-        conda install pytest
-        pytest
-    - name: Run the program
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: checkout master
+        uses: actions/checkout@v2
+      
+      - name: setup python
+        uses: actions/setup-python@v2
+        with: 
+          python-version: 3.8
+      
+      # Runs a set of commands using the runners shell
+      - name: Run the program
         
-      run: |
+        run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           python3 ./main.py
