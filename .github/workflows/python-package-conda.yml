@@ -14,10 +14,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python 3.10
+    - name: Set up Python 3.8
       uses: actions/setup-python@v2
       with:
-        python-version: 3.10
+        python-version: 3.8
     - name: Add conda to system path
       run: |
         # $CONDA is an environment variable pointing to the root of the miniconda directory
@@ -34,12 +34,11 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        conda install Beautifulsoup4 
         conda install pytest
         pytest
     - name: Run the program
         
       run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install Beautifulsoup4 
           python3 ./main.py
