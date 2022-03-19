@@ -2,7 +2,7 @@ name: Python Package using Conda
 
 on: 
  schedule:
-    - cron: "55 7 * * *"  # scheduled at 08:01 (UTC+8) everyday #每天早上八点零一分打卡
+    - cron: "55 8 *  * 1/4"    #heduled at 08:01 (UTC+8) everyday #每天早上八点零一分打卡
  workflow_dispatch:
 
  
