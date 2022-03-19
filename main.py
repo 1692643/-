@@ -14,6 +14,8 @@ from bs4 import BeautifulSoup
 def main(laravel_session):  # 参数为cookie里的laravel_session 自行抓包获取
     s = requests.session()  # 创建会话
     loginurl = "https://service.jiangsugqt.org/youth/lesson"  # 江苏省青年大学习接口
+    member1="Ac5PChQgKBQOKe1mIhEk9OMy70Jgaod8Hodrs4zS" 
+    member2="Mc3WFB02gciA8xeyqEAeinoMNkh0Iy69whufkHAb"
     # 参数
     params = {
         "s": "/youth/lesson",
@@ -30,6 +32,8 @@ def main(laravel_session):  # 参数为cookie里的laravel_session 自行抓包�
         # 74FrRKCDVZKhx91w0a4CDG53DmkeXCxBOkSzTTNH周良宇 003831928
         # esX66JF8QROB5yx89KMpFBwnF2eNrVUbSpx8FVUX 姜宇 008629871
         # vf6yckniFRDqepGNSaSD2SN4IhCv1wj6LPPqfh74 李靖翔
+        # Ac5PChQgKBQOKe1mIhEk9OMy70Jgaod8Hodrs4zS 
+        # Mc3WFB02gciA8xeyqEAeinoMNkh0Iy69whufkHAb
     }
     urllib3.disable_warnings()  # 不然会有warning
     login = s.get(url=loginurl, headers=headers, params=params, verify=False)  # 登录
@@ -73,5 +77,7 @@ def main(laravel_session):  # 参数为cookie里的laravel_session 自行抓包�
 
 
 if __name__ == '__main__':
-    laravel_session = "8rAucTd84mpMLxilmCjeWO08rbtC7opDnrwo9YvJ"
+    laravel_session = member1
+    main(laravel_session)
+    laravel_session = member2
     main(laravel_session)
